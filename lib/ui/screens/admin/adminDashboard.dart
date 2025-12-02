@@ -4,6 +4,7 @@ import 'package:burhaniguardsapp/ui/screens/admin/attendancemiqaatScreen.dart';
 import 'package:burhaniguardsapp/ui/screens/admin/createMiqaatScreen.dart';
 import 'package:burhaniguardsapp/ui/screens/admin/enrolledMembersListScreen.dart';
 import 'package:burhaniguardsapp/ui/screens/admin/membersListScreen.dart';
+import 'package:burhaniguardsapp/ui/screens/admin/miqaats_Screen.dart';
 import 'package:burhaniguardsapp/ui/widgets/adminAppBar.dart';
 import 'package:burhaniguardsapp/ui/widgets/adminBottomNavigationBar.dart';
 import 'package:flutter/material.dart';
@@ -17,16 +18,18 @@ class AdminDashboardScreen extends StatefulWidget {
 }
 
 class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
+      key: scaffoldKey,
       body: SafeArea(
         child: Column(
           children: [
-            buildAppBar(),
+            buildAppBar(context, scaffoldKey),
             Expanded(
               child: SingleChildScrollView(
                 child: Column(
@@ -175,7 +178,13 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen> {
                 ),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MiqaatScreen()),
+                  );
+                },
                 child: const Text(
                   'See All +',
                   style: TextStyle(

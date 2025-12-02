@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget buildAppBar() {
+Widget buildAppBar(BuildContext context, GlobalKey<ScaffoldState> scaffoldKey) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
     decoration: const BoxDecoration(
@@ -15,7 +15,12 @@ Widget buildAppBar() {
       children: [
         IconButton(
           icon: const Icon(Icons.menu, color: Colors.white, size: 28),
-          onPressed: () {},
+          onPressed: () {
+            // Use the scaffoldKey passed into this widget to open the drawer.
+            // This avoids relying on Scaffold.of(context), which fails when
+            // the context isn't a descendant of the Scaffold.
+            scaffoldKey.currentState?.openDrawer();
+          },
         ),
         Image.asset('assets/images/burhani guards logo.png', height: 52),
         IconButton(

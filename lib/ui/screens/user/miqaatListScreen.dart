@@ -11,13 +11,15 @@ class MiqaatListScreen extends StatefulWidget {
 }
 
 class _MiqaatListScreenState extends State<MiqaatListScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       body: Column(
         children: [
           // Custom AppBar with curved bottom
-          buildAppBar(),
+          buildAppBar(context, scaffoldKey),
           // Content
           Expanded(
             child: SingleChildScrollView(

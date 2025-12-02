@@ -1,7 +1,9 @@
 import 'package:burhaniguardsapp/core/constants/app_colors.dart';
+import 'package:burhaniguardsapp/ui/screens/user/enrolledEvents.dart';
 import 'package:burhaniguardsapp/ui/screens/user/miqaatDetailsScreen.dart';
 import 'package:burhaniguardsapp/ui/screens/user/upcomingMiqaats.dart';
 import 'package:burhaniguardsapp/ui/widgets/adminAppBar.dart';
+import 'package:burhaniguardsapp/ui/widgets/memberAppDrawer.dart';
 import 'package:burhaniguardsapp/ui/widgets/memberBottomNavigationBar.dart';
 import 'package:flutter/material.dart';
 
@@ -13,13 +15,16 @@ class HomeMiqaatScreen extends StatefulWidget {
 }
 
 class _HomeMiqaatScreenState extends State<HomeMiqaatScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: const AppDrawer(),
       body: Column(
         children: [
           // Custom AppBar with curved bottom
-          buildAppBar(),
+          buildAppBar(context, scaffoldKey),
           // Content
           Expanded(
             child: SingleChildScrollView(
@@ -61,6 +66,44 @@ class _HomeMiqaatScreenState extends State<HomeMiqaatScreen> {
                             'Mumbai, S',
                             ['user1', 'user2'],
                             '+25',
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Upcoming Miqaat's Header
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Your Miqaat\'s',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black,
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) =>
+                                        const EnrolledMiqaatScreen()),
+                              );
+                            },
+                            child: const Text(
+                              'See All >',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
                           ),
                         ],
                       ),
