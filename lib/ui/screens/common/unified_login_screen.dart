@@ -5,15 +5,16 @@ import 'package:burhaniguardsapp/ui/widgets/password_change_dialog.dart';
 import 'package:burhaniguardsapp/ui/widgets/shaped_background.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:burhaniguardsapp/core/models/auth_models.dart';
 
-class AdminLoginScreen extends StatefulWidget {
-  const AdminLoginScreen({Key? key}) : super(key: key);
+class UnifiedLoginScreen extends StatefulWidget {
+  const UnifiedLoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<AdminLoginScreen> createState() => _AdminLoginScreenState();
+  State<UnifiedLoginScreen> createState() => _UnifiedLoginScreenState();
 }
 
-class _AdminLoginScreenState extends State<AdminLoginScreen> {
+class _UnifiedLoginScreenState extends State<UnifiedLoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _itsNoController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -48,6 +49,8 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
               ),
             );
 
+            // TODO: Navigate to appropriate dashboard based on role
+            // For now, navigate to admin dashboard
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -178,9 +181,9 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
 
         const SizedBox(height: 40),
         Text(
-          'Login as Captain',
+          'Welcome',
           style: GoogleFonts.poppins(
-              fontSize: 32,
+              fontSize: 55,
               fontWeight: FontWeight.bold,
               color: AppColors.primary),
         ),
@@ -235,41 +238,40 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
   }
 
   Widget _buildFooter() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-          'want to login as a user?',
+    return Column(
+      children: const [
+        Text(
+          'Powered By',
           style: TextStyle(
             fontSize: 11,
             color: AppColors.primary,
+            decoration: TextDecoration.underline,
+            decorationColor: Colors.blue,
+            decorationThickness: 2,
           ),
         ),
-        // SizedBox(height: 4),
-
-        TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text(
-              'Click Here',
-              style: TextStyle(
-                fontSize: 12,
-                color: AppColors.primary,
-                fontWeight: FontWeight.w600,
-              ),
-            ))
+        SizedBox(height: 4),
+        Text(
+          'Clear Concept Solutions',
+          style: TextStyle(
+            fontSize: 12,
+            color: AppColors.primary,
+            decoration: TextDecoration.underline,
+            decorationColor: Colors.blue,
+            decorationThickness: 2,
+          ),
+        ),
       ],
     );
   }
 
-  void _showPasswordChangeDialog(String captainName, String itsNumber) {
+  void _showPasswordChangeDialog(String memberName, String itsNumber) {
     showDialog(
       context: context,
       barrierDismissible: false, // User must change password
       builder: (BuildContext dialogContext) {
         return PasswordChangeDialog(
-          captainName: captainName,
+          captainName: memberName,
           onPasswordChanged:
               (String newPassword, String confirmPassword) async {
             try {

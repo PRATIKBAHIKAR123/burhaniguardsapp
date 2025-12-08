@@ -1,4 +1,4 @@
-import 'package:burhaniguardsapp/ui/screens/common/welcomeScreen.dart';
+import 'package:burhaniguardsapp/ui/screens/common/unified_login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pwa_install/pwa_install.dart';
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const LoginScreen(),
+      home: const UnifiedLoginScreen(),
     );
   }
 }
